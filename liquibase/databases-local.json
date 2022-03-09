@@ -1,0 +1,20 @@
+
+[
+	{
+        "type": "mssql",
+        "changeLogFile": "../liquibase/example.ms_example/changelog/changelog.xml",
+        "host": "test.test.test",
+        "port": "1433",
+        "param.database": "master",
+        "secrets":[
+            {"master": "master_secret_password"},
+            {"param.password_ro": "ro_secret_password"},
+            {"param.password_rw": "rw_secret_password"}
+        ],
+        "presql":[
+            "../liquibase/example.ms_example/pre-sql/db_1_createdb.sql",
+            "../liquibase/example.ms_example/pre-sql/db_2_create_roles.sql"
+        ]  
+    }
+
+]

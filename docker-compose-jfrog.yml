@@ -1,0 +1,15 @@
+---
+version: '3'
+
+## This service has been separated from the others given the issue with the env_file validation
+##  https://github.com/docker/compose/issues/5375
+services:
+  jfrog:
+    image: ${REPOSITORY_URL}/ben-jfrog-cli-go:1.39.6
+    working_dir: /opt/app
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp:/tmp
+      - ${CI_PROJECT_DIR}:/opt/app
+    env_file:
+      - .env

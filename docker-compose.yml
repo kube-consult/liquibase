@@ -1,0 +1,30 @@
+---
+version: '3'
+
+services:
+  hadolint:
+    image: ${REPOSITORY_URL}/hadolint:v1.18.0-6-ga0d655d-alpine-9
+    working_dir: /opt/app
+    volumes:
+    - .:/opt/app
+
+  image-test:
+    image: ${REPOSITORY_URL}/${APP_NAME}:${BUILD_VERSION}
+    working_dir: /opt/app
+    volumes:
+    - .:/opt/app
+
+  liquibase:
+    image: ${REPOSITORY_URL}/liquibase-nodejs:0.0.1-38
+    working_dir: /work/src
+    network_mode: bridge
+    stdin_open: true
+    tty: true
+    volumes:
+    - .:/work
+    - ~/.aws:/home/liquibase/.aws:z
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-CU12-ubuntu-20.04
+    network_mode: bridge
+
